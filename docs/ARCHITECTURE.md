@@ -10,6 +10,7 @@
 - `src/loglens/discovery.py::find_log_files` → zwraca posortowane według nazw pliki `.clef` i `.json` bez podkatalogów, ignorując wielkość liter rozszerzeń; testy w `tests/test_discovery.py` obejmują też puste katalogi i błędne ścieżki.
 - `src/loglens/__init__.py` → publiczny pakiet `loglens` i jego wersja.
 - `src/loglens/models.py` → model `LogEvent` z wartościami domyślnymi, kontekstem i lokalizacją źródłową, sprawdzany w `tests/test_models.py`.
+- `src/loglens/reader.py::read_file` → leniwie czyta plik CLEF w UTF-8, przypisując zdarzeniom ścieżkę źródłową i numery linii od 1; testy w `tests/test_reader.py`.
 - `src/loglens/clef.py` → odczyt pól `@t`, `@l`, `@mt` i `@m` z pojedynczej linii JSON do `LogEvent`, testowany w `tests/test_clef.py` na próbce `samples/basic.clef`.
 - `src/loglens/clef.py::parse_line` → normalizuje czas do UTC (także daty bez strefy), zachowuje brak czasu i odrzuca błędne daty; testy obejmują offsety i zmianę dnia.
 - `src/loglens/clef.py::_normalize_level` → normalizuje sześć poziomów Serilog bez rozróżniania wielkości liter, domyślnie używa `Information` przy braku `@l` i odrzuca nieznane wartości; testy w `tests/test_clef.py`.
