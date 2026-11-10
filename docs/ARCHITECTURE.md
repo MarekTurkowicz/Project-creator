@@ -1,5 +1,6 @@
 # Mapa kodu
 
+- `src/loglens/database.py::count_requests_by_endpoint` → liczy żądania i udział zdarzeń Error/Fatal według niepustego `RequestPath` przez `sql/count_requests_by_endpoint.sql`; agregaty, brak danych HTTP i pustą bazę sprawdza `tests/test_endpoint_counts.py`.
 - `src/loglens/http.py` → wyodrębnia `RequestPath` i `Elapsed` w milisekundach do `HttpDetails`; brakujące i niepoprawne pola oraz odczyt z CLEF sprawdza `tests/test_http.py`.
 - `src/loglens/database.py::count_errors_by_time` → agreguje datowane zdarzenia Error i Fatal w stałych koszykach od epoki Unix przez `sql/count_errors_by_time.sql`, zwracając początki w UTC; granice, strefy, luki, puste dane i walidację czasu sprawdza `tests/test_error_counts.py`.
 - `src/loglens/database.py::count_events_by_level` → liczy zdarzenia według poziomu przez `sql/count_events_by_level.sql`, zwracając pary poziom–liczność w kolejności alfabetycznej; agregaty i pustą bazę sprawdza `tests/test_level_counts.py`.

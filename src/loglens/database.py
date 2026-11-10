@@ -59,6 +59,23 @@ def count_events_by_level(
     return connection.execute(query).fetchall()
 
 
+def count_requests_by_endpoint(
+    connection: duckdb.DuckDBPyConnection,
+) -> list[tuple[str, int, float]]:
+    """Return (endpoint, request count, error fraction) ordered by endpoint.
+
+    Each event with a nonblank string RequestPath counts as one request,
+    regardless of timestamp or Elapsed. Paths are preserved verbatim, as in
+    extract_http. Error and Fatal events count as errors; the fraction ranges
+    from 0 to 1. Missing or invalid paths are omitted. Empty input yields an
+    empty list. The caller retains ownership of the connection.
+    """
+    query = files("loglens").joinpath("sql/count_requests_by_endpoint.sql").read_text(
+        encoding="utf-8"
+    )
+    return connection.execute(query).fetchall()
+
+
 def count_errors_by_time(
     connection: duckdb.DuckDBPyConnection,
     *,
